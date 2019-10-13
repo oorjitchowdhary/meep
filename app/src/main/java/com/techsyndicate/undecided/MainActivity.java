@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         List<String> zorpList = Arrays.asList(zorpArray);
                         zorpList.set(zorpList.indexOf(i), "MEEP");
                         String meep = TextUtils.join(", ", zorpList);
-                        outputText.setText(meep);
+                        outputText.setText(capitalize(meep));
 
                     }
                 }
@@ -90,5 +90,14 @@ public class MainActivity extends AppCompatActivity {
         char[] ch = str.toCharArray();
         char c = ch[len-1];
         return c;
+    }
+
+    public String capitalize(String str) {
+        char[] ch = str.toCharArray();
+        for(int i = 0; i<str.length(); i++) {
+            if (ch[i]=='.'){
+                ch[i+2] = ch[i+2]
+            }
+        }
     }
 }
