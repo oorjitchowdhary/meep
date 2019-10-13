@@ -3,6 +3,7 @@ package com.techsyndicate.undecided;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -58,11 +59,17 @@ public class MainActivity extends AppCompatActivity {
 
                 String zorp = Arrays.stream(revArray).collect(Collectors.joining(" "));
                 String[] zorpArray = zorp.split(" ");
-                for (String i : zorpArray)
-                    System.out.println(i);
-                    String meep = Arrays.stream(zorpArray).collect(Collectors.joining(" "));
+                for (String i : zorpArray) {
+                    if (i.length() > 8) {
+                        List<String> zorpList = Arrays.asList(zorpArray);
+                        zorpList.set(zorpList.indexOf(i), "MEEP");
+                        String meep = TextUtils.join(", ", zorpList);
+                        outputText.setText(meep);
 
-                outputText.setText(meep);
+                    }
+                }
+                String normal = Arrays.stream(zorpArray).collect(Collectors.joining(" "));
+                outputText.setText(normal);
             }
         });
 
