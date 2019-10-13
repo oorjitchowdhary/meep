@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 String replace = content.replace("c", "k");
                 String sentence = replace.replace("w", "v");
 
+
                 int count = 0;
                 for (int i = 0; i < sentence.length(); i++) {
                     if (sentence.charAt(i) == ',') {
@@ -49,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
 
                 String reversedSentence = "";
                 for (int i =count; i>=0; i--) {
+                    if (lastChar(sentenceSplit[i]) == '.' || lastChar(sentenceSplit[i]) == '?') {
+                        int f = 0;
+                    }
+                    else
+                        sentenceSplit[i] = sentenceSplit[i] + ",";
+                    if (i==0) {
+                        sentenceSplit[i] = sentenceSplit[i].substring(0, sentenceSplit[i].length() - 1);
+                    }
                     reversedSentence = reversedSentence + " " + sentenceSplit[i];
                     System.out.println(reversedSentence);
                 }
@@ -74,5 +83,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public char lastChar(String str){
+        int len = str.length();
+        char[] ch = str.toCharArray();
+        char c = ch[len-1];
+        return c;
     }
 }
