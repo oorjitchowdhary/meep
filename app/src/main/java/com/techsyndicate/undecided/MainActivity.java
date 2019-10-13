@@ -1,15 +1,36 @@
 package com.techsyndicate.undecided;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
+import com.google.firebase.ml.vision.text.RecognizedLanguage;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
     TextView outputText;
     TextInputEditText inputEditText;
     MaterialButton btn;
+    private Bitmap bitmap;
+    private Uri mUriPhotoTaken;
+    private File mFilePhotoTaken;
+    private Uri imagUrl;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,5 +100,78 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void clickPic(View view) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(intent.resolveActivity(getPackageManager()) != null) {
+            // Save the photo taken to a temporary file.
+            File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            try {
+                mFilePhotoTaken = File.createTempFile(
+                        "IMG_",  /* prefix */
+                        ".jpg",         /* suffix */
+                        storageDir      /* directory */
+                );
+                // Create the File where the photo should go
+                // Continue only if the File was successfully created
+                if (mFilePhotoTaken != null) {
+                    mUriPhotoTaken = FileProvider.getUriForFile(this,
+                            "com.techsyndicate.undecided.fileprovider",
+                            mFilePhotoTaken);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, mUriPhotoTaken);
+
+                    // Finally start camera activity
+                    startActivityForResult(intent, 1);
+                }
+            } catch (IOException e) {
+                e.getMessage();
+            }
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+        switch(requestCode) {
+            case 1:
+                if(resultCode == RESULT_OK){
+                    imagUrl = Uri.fromFile(mFilePhotoTaken);
+                    bitmap = ImageHelper.loadSizeLimitedBitmapFromUri(imagUrl, getContentResolver());
+                    if (bitmap != null) {
+                        FirebaseVisionImage visionImage = FirebaseVisionImage.fromBitmap(bitmap);
+                        recognizeText(visionImage);
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void recognizeText(FirebaseVisionImage visionImage){
+        FirebaseApp.initializeApp(this);
+        FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance()
+                .getOnDeviceTextRecognizer();
+
+        final Task<FirebaseVisionText> result =
+                detector.processImage(visionImage)
+                .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+                    @Override
+                    public void onSuccess(FirebaseVisionText firebaseVisionText) {
+                        System.out.println("Image processsed successfully");
+                        displayText(firebaseVisionText);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("Image processing failed.");
+                    }
+                });
+    }
+
+    private void displayText(FirebaseVisionText firebaseVisionText) {
+        String resultText = firebaseVisionText.getText();
+        inputEditText.setText(resultText, TextView.BufferType.EDITABLE);
     }
 }
