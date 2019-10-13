@@ -42,9 +42,10 @@ public class MainActivity extends AppCompatActivity {
                         count=count+1;
                     }
                 }
+                int spacecount[];
 
                 String[] sentenceSplit = sentence.split(",", count+1);
-                
+
                 String reversedSentence = "";
                 for (int i =count; i>=0; i--) {
                     reversedSentence = reversedSentence + " " + sentenceSplit[i];
