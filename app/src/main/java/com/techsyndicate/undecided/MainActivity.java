@@ -36,12 +36,24 @@ public class MainActivity extends AppCompatActivity {
                 String replace = content.replace("c", "k");
                 String sentence = replace.replace("w", "v");
 
-                String[] sentenceSplit = sentence.split(",", 2);
-                String reversedSentence = sentenceSplit[1] + " " + sentenceSplit[0];
+                int count = 0;
+                for (int i = 0; i < sentence.length(); i++) {
+                    if (sentence.charAt(i) == ',') {
+                        count=count+1;
+                    }
+                }
+
+                String[] sentenceSplit = sentence.split(",", count+1);
+                
+                String reversedSentence = "";
+                for (int i =count; i>=0; i--) {
+                    reversedSentence = reversedSentence + " " + sentenceSplit[i];
+                    System.out.println(reversedSentence);
+                }
 
                 String[] revArray = reversedSentence.split(" ");
                 String lastWord = revArray[revArray.length - 1];
-                String newLastWord = lastWord + " zorp";
+                String newLastWord = lastWord + " zorp.";
                 revArray[revArray.length - 1] = lastWord.replace(lastWord, newLastWord);
 
                 String zorp = Arrays.stream(revArray).collect(Collectors.joining(" "));
