@@ -182,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
     private void displayText(FirebaseVisionText firebaseVisionText) {
         String resultText = firebaseVisionText.getText();
         inputEditText.setText(resultText, TextView.BufferType.EDITABLE);
+    }
       
     public char lastChar(String str){
         int len = str.length();
