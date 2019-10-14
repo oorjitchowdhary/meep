@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     if (i==0) {
                         sentenceSplit[i] = sentenceSplit[i].substring(0, sentenceSplit[i].length() - 1);
                     }
-                    reversedSentence = reversedSentence + " " + sentenceSplit[i];
+                    reversedSentence = reversedSentence + sentenceSplit[i].trim() + " ";
                     System.out.println(reversedSentence);
                 }
 
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 String normal = Arrays.stream(zorpArray).collect(Collectors.joining(" "));
-                outputText.setText(normal);
+                outputText.setText(capitalize(normal));
             }
         });
 
@@ -193,10 +193,16 @@ public class MainActivity extends AppCompatActivity {
 
     public String capitalize(String str) {
         char[] ch = str.toCharArray();
+        System.out.println(ch);
         for(int i = 0; i<str.length(); i++) {
-            if (ch[i]=='.'){
-                ch[i+2] = ch[i+2]
+            if (ch[i]=='.'&& i!=str.length()-1){
+                ch[i+2] = Character.toUpperCase(ch[i+2]);
             }
         }
+        System.out.println(ch);
+        ch[0] = Character.toUpperCase(ch[0]);
+        System.out.println(ch[0]);
+        String st = new String(ch);
+        return st;
     }
 }
