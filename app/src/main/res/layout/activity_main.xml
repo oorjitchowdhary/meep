@@ -17,11 +17,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="English:"
+            android:text="English"
             android:fontFamily="@font/chivo"
             android:textColor="@color/colorPrimary"
             android:textSize="30dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="10dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -33,7 +33,8 @@
                 android:layout_height="200dp"
                 android:fontFamily="@font/chivo"
                 android:id="@+id/inputtext"
-                android:hint="Enter text...."
+                android:hint="Hey, how arya doing?"
+                android:textSize="25sp"
                 android:textColorHint="#222"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -42,41 +43,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:layout_width="0dp"
-            android:layout_height="53dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/chivo"
-            android:textSize="25sp"
-            android:textAllCaps="false"
-            android:onClick="clickPic"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/ic_camera_alt_black_24dp"
-            android:backgroundTint="@color/colorAccent"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="Translate"
-            android:fontFamily="@font/chivo"
-            android:textSize="25sp"
-            android:textAllCaps="false"
-            android:id="@+id/btn"/>
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="0dp"
+                android:layout_height="53dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/chivo"
+                android:textSize="25sp"
+                android:textAllCaps="false"
+                android:onClick="clickPic"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_camera_alt_black_24dp"
+                android:backgroundTint="@color/colorAccent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Translate"
+                android:fontFamily="@font/chivo"
+                android:textSize="24sp"
+                android:textAllCaps="false"
+                android:id="@+id/btn"/>
+
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Exunite:"
+            android:text="Exunite"
             android:fontFamily="@font/chivo"
             android:textColor="@color/colorPrimary"
             android:textSize="30dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="5dp"
             android:backgroundTint="@color/colorPrimary">
 
             <TextView
@@ -86,9 +92,10 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/chivo"
                 android:gravity="center"
-                android:text=""
+                android:text="Hov arya doing, hey zorp."
                 android:textColor="#EEE"
                 android:textSize="25sp"
+                android:padding="5dp"
                 android:layout_marginBottom="10dp" />
         </androidx.cardview.widget.CardView>
 

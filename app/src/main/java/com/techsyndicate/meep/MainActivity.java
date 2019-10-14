@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         inputEditText = findViewById(R.id.inputtext);
         outputText = findViewById(R.id.outputtext);
         btn = findViewById(R.id.btn);
+
+        outputText.setMovementMethod(new ScrollingMovementMethod());
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
