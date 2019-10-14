@@ -198,6 +198,9 @@ public class MainActivity extends AppCompatActivity {
             if (ch[i]=='.'&& i!=str.length()-1){
                 ch[i+2] = Character.toUpperCase(ch[i+2]);
             }
+            if (ch[i]=='a' && ch[i+1]=='n' && ch[i+3]=='M'){
+                ch[i+1] = ' ';
+            }
         }
         System.out.println(ch);
         ch[0] = Character.toUpperCase(ch[0]);
