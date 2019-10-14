@@ -1,4 +1,4 @@
-package com.techsyndicate.undecided;
+package com.techsyndicate.meep;
 
 import org.junit.Test;
 

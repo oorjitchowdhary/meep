@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.techsyndicate.undecided">
+    package="com.techsyndicate.meep">
 
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
@@ -27,7 +27,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.techsyndicate.undecided.fileprovider"
+            android:authorities="com.techsyndicate.meep.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

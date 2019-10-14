@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_centerInParent="true"
         android:layout_margin="15dp">
 
         <TextView
@@ -45,7 +46,6 @@
             android:layout_width="0dp"
             android:layout_height="53dp"
             android:layout_weight="1"
-            android:text="OCR"
             android:fontFamily="@font/chivo"
             android:textSize="25sp"
             android:textAllCaps="false"

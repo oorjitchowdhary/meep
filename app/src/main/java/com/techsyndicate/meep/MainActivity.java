@@ -1,4 +1,4 @@
-package com.techsyndicate.undecided;
+package com.techsyndicate.meep;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,8 +6,6 @@ import androidx.core.content.FileProvider;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,7 +13,6 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,12 +24,9 @@ import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
-import com.google.firebase.ml.vision.text.RecognizedLanguage;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -126,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 // Continue only if the File was successfully created
                 if (mFilePhotoTaken != null) {
                     mUriPhotoTaken = FileProvider.getUriForFile(this,
-                            "com.techsyndicate.undecided.fileprovider",
+                            "com.techsyndicate.meep.fileprovider",
                             mFilePhotoTaken);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, mUriPhotoTaken);
 
